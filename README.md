@@ -1,0 +1,1 @@
+Pake extension latex workshop

@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{left=4cm,right=3cm,top=3cm,bottom=3cm}
+\onehalfspacing
+% \setlength{\textfloatsep}{0pt plus 1.0pt minus 2.0pt}
+% \setlength{\floatsep}{0pt plus 1.0pt minus 2.0pt}
+% \setlength{\intextsep}{0pt plus 1.0pt minus 2.0pt}
+\setlength{\textfloatsep}{15pt plus 2.0pt minus 2.0pt}
+\setlength{\floatsep}{12pt plus 2.0pt minus 2.0pt}
+\setlength{\intextsep}{12pt plus 2.0pt minus 2.0pt}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{newtxtext,newtxmath} % Times New Roman font
+\usepackage{sectsty}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{float} % untuk [H] agar posisi tabel tepat di lokasi kode
+\usepackage[style=apa,sorting=nyt]{biblatex}
+\usepackage{longtable}
+\usepackage{array}    % untuk p{width}
+\usepackage{caption}  % opsional, agar caption bisa dikustomisasi
+\usepackage{lscape} % jika ingin landscape
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{lscape}
+\usepackage{chngcntr}
+\usepackage{tocloft}
+% Hilangkan space sebelum judul daftar isi/gambar/tabel
+
+\renewcommand{\cfttoctitlefont}{}
+\renewcommand{\cftloftitlefont}{}
+\renewcommand{\cftlottitlefont}{}
+\renewcommand{\cftaftertoctitle}{}
+\renewcommand{\cftafterloftitle}{}
+\renewcommand{\cftafterlottitle}{}
+
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{0pt}
+
+\setlength{\cftbeforeloftitleskip}{0pt}
+\setlength{\cftafterloftitleskip}{0pt}
+
+\setlength{\cftbeforelottitleskip}{0pt}
+\setlength{\cftafterlottitleskip}{0pt}
+
+\counterwithin{figure}{chapter} % atau {section} kalau tiap section
+\counterwithin{table}{chapter}
+\DeclareLanguageMapping{english}{english-apa}
+% \DefineBibliographyStrings{english}{andothers = {dkk.,}}
+\addbibresource{reference.bib} % file referensi BibTeX
+
+\newcommand{\bab}[2]{
+  \refstepcounter{chapter} % Tambahkan ini untuk update counter
+  \chapter*{
+    \makebox[\textwidth][c]{\textbf{#1}}\\
+    \makebox[\textwidth][c]{\textbf{#2}}
+  }
+  \addcontentsline{toc}{chapter}{#1 #2}
+  \setcounter{section}{0} % Reset section tiap bab
+}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+\chapterfont{\normalsize}
+\sectionfont{\normalsize}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+% \renewcommand{\contentsname}{Daftar Isi}       % Ganti judul TOC
+% \renewcommand{\listfigurename}{Daftar Gambar}  % Ganti judul daftar gambar
+% \renewcommand{\listtablename}{Daftar Tabel}    % Ganti judul daftar tabel
+\renewcommand{\contentsname}{}       % Hapus judul default "Daftar Isi"
+\renewcommand{\listfigurename}{}     % Hapus judul default "Daftar Gambar"
+\renewcommand{\listtablename}{}      % Hapus judul default "Daftar Tabel"
+
+\begin{document}
+\fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+\pagenumbering{gobble}
+\include{cover}
+
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\include{abstrak}
+
+\include{kata_pengantar}
+
+\clearpage
+\bab{DAFTAR ISI}{}
+\vspace{-1cm}  % sesuaikan nilai ini sampai spasi hilang
+\tableofcontents
+
+\clearpage
+\bab{DAFTAR GAMBAR}{}
+\vspace{-1cm}
+\listoffigures
+
+\clearpage
+\bab{DAFTAR TABEL}{}
+\vspace{-1cm}
+\listoftables
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyhf{}
+
+% Nomor halaman di kanan bawah untuk halaman biasa
+\fancyhead[R]{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+% \fancyhead[R]{\thepage}
+% \renewcommand{\headrulewidth}{0pt}
+% % Atur agar halaman awal bab juga ikut pakai fancy
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\include{bab1}
+\include{bab2}
+\include{bab3}
+\include{bab4}
+\include{bab5}
+\bab{DAFTAR PUSTAKA}{}
+\defbibheading{none}{} % <-- Hapus heading default
+\renewcommand*{\bibfont}{\normalfont\small\onehalfspacing}
+\setlength{\bibhang}{1cm}
+\printbibliography[heading=none]% Menampilkan daftar pustaka
+
+\end{document}
